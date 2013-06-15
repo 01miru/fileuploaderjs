@@ -11,8 +11,8 @@
 		if(file_field != null){
 			form_data.append('file', file_field.files[sended]);
 			xhr.timeout = options.timeout;
-			if(options.progress && typeof options.progress == "function"){
-				xhr.upload.addEventListener('progress', options.progress, false);
+			if(options.onprogress && typeof options.onprogress == "function"){
+				xhr.upload.addEventListener('progress', options.onprogress, false);
 			}
 			if(options.oncomplete && typeof options.oncomplete == "function"){
 				xhr.addEventListener('loadend', options.oncomplete, false);
