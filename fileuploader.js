@@ -1,36 +1,64 @@
 (function(window, undefined){
+	var sended = 0,
+		file_field = null,
+		options = null,
+		xhr = new XMLHttpRequest(),
+		form_data = new FormData();
+
+	var prepare_request = function(){
+		xhr.open('post', options.url, true);
+
+		if(file_field != null){
+			form_data.append('file', file_field.files[sended]);
+			xhr.timeout = options.timeout;
+			if(options.progress && typeof options.progress == "function"){
+				xhr.upload.addEventListener('progress', options.progress, false);
+			}
+			if(options.oncomplete && typeof options.oncomplete == "function"){
+				xhr.addEventListener('loadend', options.oncomplete, false);
+			}
+			if(options.onerror && typeof options.onerror == "function"){
+				xhr.addEventListener('error', options.onerror, false);
+			}
+			if(options.ontimeout && typeof options.ontimeout == "function"){
+				xhr.addEventListener('timeout', options.ontimeout, false);
+			}
+		}
+		if(options.headers){
+			for(key in options.headers)
+			{
+				xhr.setRequestHeader(key, options.headers[key]);	
+			}
+		}
+		xhr.addEventListener('loadend', function(event){
+			upload_next_file();
+		}, false);
+	};
+
 	window.fileuploader = function(input_options){
 		if(typeof input_options == "object"){
-			var fd = new FormData()
-			var file_field = document.querySelector(input_options.selector)
-			if(file_field != null){
-				var xhr = new XMLHttpRequest();
-				xhr.open('post', input_options.url, true);
-				fd.append('file', file_field.files[0]);
-				xhr.timeout = input_options.timeout;
-				if(input_options.progress && typeof input_options.progress == "function"){
-					xhr.upload.addEventListener('progress', input_options.progress, false);
-				}
-				if(input_options.oncomplete && typeof input_options.oncomplete == "function"){
-					xhr.addEventListener('loadend', input_options.oncomplete, false);
-				}
-				if(input_options.onerror && typeof input_options.onerror == "function"){
-					xhr.addEventListener('error', input_options.onerror, false);
-				}
-				if(input_options.ontimeout && typeof input_options.ontimeout == "function"){
-					xhr.addEventListener('timeout', input_options.ontimeout, false);
-				}
-			}
-			if(input_options.headers){
-				for(key in input_options.headers)
-				{
-					xhr.setRequestHeader(key, input_options.headers[key]);	
-				}
-			}
-			xhr.send(fd);
-				return xhr;
+			form_data = new FormData();
+			options = input_options;
+			file_field = document.querySelector(input_options.selector);
+			prepare_request();
+
+			xhr.send(form_data);
 		}else{
 			return null;
 		}
 	};
+
+	var upload_next_file = function(){
+		sended+=1;
+		if(file_field.files[sended] != undefined){
+			delete xhr;
+			xhr = new XMLHttpRequest();
+			form_data = new FormData();
+			form_data.append('file', file_field.files[sended]);
+			prepare_request();
+			xhr.send(form_data);
+			delete form_data;
+		}
+	};
+
 })(window);
