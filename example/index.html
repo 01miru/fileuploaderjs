@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>fileuploader.js example</title>
+	<meta charset="utf-8">
+	<script src="fileuploader.min.js"></script>
+</head>
+<body>
+	<input type="file" class="user-file">
+	<button class="send" onclick="upload()">Send</button>
+	<br/><br/>
+	<progress min="0" max="100" value="0" class="progressbar"></progress>
+	<script>
+	function upload(){
+		var loader = document.querySelector('.progressbar');
+		var upl = fileuploader({
+			selector: '.user-file',
+			url: 'upload.php',
+			data: {
+				'filename': 'myfile',
+				'type': 'other'
+			},
+			onprogress: function(e){
+				loader.value = Math.round((e.loaded / e.total) * 100);
+			},
+			oncomplete: function(e){
+				loader.value = 100;
+				console.log('complete');
+			},
+			onerror: function(e){
+				console.log(e);
+			}
+		});
+	}
+	</script>
+</body>
+</html>
