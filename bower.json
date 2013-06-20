@@ -1,5 +1,5 @@
 {
-  "name": "fileuploaderjs",
+  "name": "fileuploader",
   "version": "0.1.1",
   "main": "fileuploader.min.js",
   "ignore": [
