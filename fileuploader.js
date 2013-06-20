@@ -24,12 +24,21 @@
 				xhr.addEventListener('timeout', options.ontimeout, false);
 			}
 		}
+		
 		if(options.headers){
 			for(key in options.headers)
 			{
 				xhr.setRequestHeader(key, options.headers[key]);	
 			}
 		}
+
+		if(options.data){
+			for(key in options.data)
+			{
+				form_data.append(key, options.data[key]);	
+			}
+		}		
+
 		xhr.addEventListener('loadend', function(event){
 			upload_next_file();
 		}, false);
