@@ -42,6 +42,8 @@
 		xhr.addEventListener('loadend', function(event){
 			upload_next_file();
 		}, false);
+
+		console.log(sended);
 	};
 
 	window.fileuploader = function(input_options){
@@ -50,7 +52,6 @@
 			options = input_options;
 			file_field = document.querySelector(input_options.selector);
 			prepare_request();
-
 			xhr.send(form_data);
 		}else{
 			return null;
@@ -58,15 +59,20 @@
 	};
 
 	var upload_next_file = function(){
-		sended+=1;
-		if(file_field.files[sended] != undefined){
-			delete xhr;
-			xhr = new XMLHttpRequest();
-			form_data = new FormData();
-			form_data.append('file', file_field.files[sended]);
-			prepare_request();
-			xhr.send(form_data);
-			delete form_data;
+		if(file_field.files.length > 1){
+			sended+=1;
+			if(file_field.files[sended] != undefined){
+				delete xhr;
+				xhr = new XMLHttpRequest();
+				form_data = new FormData();
+				form_data.append('file', file_field.files[sended]);
+				prepare_request();
+				xhr.send(form_data);
+				delete form_data;
+			}else{
+				sended = 0;
+				file_field.value = "";
+			}
 		}
 	};
 
