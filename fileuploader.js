@@ -42,8 +42,6 @@
 		xhr.addEventListener('loadend', function(event){
 			upload_next_file();
 		}, false);
-
-		console.log(sended);
 	};
 
 	window.fileuploader = function(input_options){
