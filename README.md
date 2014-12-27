@@ -2,6 +2,12 @@
 
 Tiny pure javascript ajax uploader for modern browsers (including mobile).
 
+## Installation using bower
+
+```shell
+> bower install fileuploader
+```
+
 ## Example
 
 HTML
