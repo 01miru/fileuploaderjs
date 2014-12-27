@@ -24,7 +24,8 @@
 			},
 			oncomplete: function(e){
 				loader.value = 100;
-				console.log('complete');
+				alert('Upload complete!');
+				loader.value = 0;
 			},
 			onerror: function(e){
 				console.log(e);

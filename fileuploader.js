@@ -6,6 +6,7 @@
 		form_data = new FormData();
 
 	var prepare_request = function(){
+		xhr = new XMLHttpRequest();
 		xhr.open('post', options.url, true);
 
 		if(file_field != null){
