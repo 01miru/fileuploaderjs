@@ -1,3 +1,4 @@
+/* fileuploader.js v0.1.4dev by Dorian Nowak */
 (function(window, undefined){
 	var sended = 0,
 		file_field = null,
@@ -29,7 +30,14 @@
 			}
 			if(options.onerror && typeof options.onerror == "function"){
 				xhr.addEventListener('error', function(){
-					options.onerror(this, this.status);
+					var content_type = this.getResponseHeader('content-type');
+					var response = this.response;
+					if (content_type == 'application/json'){
+						try{
+							response = JSON.parse(response);
+						}catch(ex){}
+					}
+					options.onerror(response, this.status, this);
 				}, false);
 			}
 			if(options.ontimeout && typeof options.ontimeout == "function"){
