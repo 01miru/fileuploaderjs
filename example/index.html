@@ -2,7 +2,7 @@
 <head>
 	<title>fileuploader.js example</title>
 	<meta charset="utf-8">
-	<script src="fileuploader.min.js"></script>
+	<script src="../fileuploader.js"></script>
 </head>
 <body>
 	<input type="file" class="user-file" multiple>
@@ -22,7 +22,9 @@
 			onprogress: function(e){
 				loader.value = Math.round((e.loaded / e.total) * 100);
 			},
-			oncomplete: function(e){
+			oncomplete: function(e, status){
+				console.log(status);
+				
 				loader.value = 100;
 				alert('Upload complete!');
 				loader.value = 0;

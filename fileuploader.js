@@ -16,13 +16,19 @@
 				xhr.upload.addEventListener('progress', options.onprogress, false);
 			}
 			if(options.oncomplete && typeof options.oncomplete == "function"){
-				xhr.addEventListener('loadend', options.oncomplete, false);
+				xhr.addEventListener('loadend', function(){
+					options.oncomplete(this.response, this.status, this);
+				}, false);
 			}
 			if(options.onerror && typeof options.onerror == "function"){
-				xhr.addEventListener('error', options.onerror, false);
+				xhr.addEventListener('error', function(){
+					options.onerror(this, this.status);
+				}, false);
 			}
 			if(options.ontimeout && typeof options.ontimeout == "function"){
-				xhr.addEventListener('timeout', options.ontimeout, false);
+				xhr.addEventListener('timeout', function(){
+					options.ontimeout(this, this.status)
+				}, false);
 			}
 		}
 		
