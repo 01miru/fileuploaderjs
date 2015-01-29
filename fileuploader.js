@@ -61,7 +61,7 @@
 			}
 		}		
 
-		xhr.addEventListener('loadend', function(event){
+		xhr.addEventListener('loadend', function(){
 			upload_next_file();
 		}, false);
 	};
