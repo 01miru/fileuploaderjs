@@ -60,7 +60,7 @@ Data parameter contains response from server. If content type of response is JSO
 
 Status parameter contains status code from response (ex. 200, 302..)
 
-### On error
+### On error event
 
 Same as above.
 
