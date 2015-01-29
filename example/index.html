@@ -22,9 +22,9 @@
 			onprogress: function(e){
 				loader.value = Math.round((e.loaded / e.total) * 100);
 			},
-			oncomplete: function(e, status){
-				console.log(status);
-				
+			oncomplete: function(data, status){
+				console.log(data);
+
 				loader.value = 100;
 				alert('Upload complete!');
 				loader.value = 0;

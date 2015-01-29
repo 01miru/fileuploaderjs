@@ -17,7 +17,14 @@
 			}
 			if(options.oncomplete && typeof options.oncomplete == "function"){
 				xhr.addEventListener('loadend', function(){
-					options.oncomplete(this.response, this.status, this);
+					var content_type = this.getResponseHeader('content-type');
+					var response = this.response;
+					if (content_type == 'application/json'){
+						try{
+							response = JSON.parse(response);
+						}catch(ex){}
+					}
+					options.oncomplete(response, this.status, this);
 				}, false);
 			}
 			if(options.onerror && typeof options.onerror == "function"){
