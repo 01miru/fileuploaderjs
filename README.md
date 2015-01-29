@@ -41,11 +41,11 @@ JavaScript
 			onprogress: function(e){
 				loader.value = Math.round((e.loaded / e.total) * 100);
 			},
-			oncomplete: function(e){
+			oncomplete: function(data, status, xhr){
 				loader.value = 100;
 				console.log('complete');
 			},
-			onerror: function(e){
+			onerror: function(data, status, xhr){
 				console.log(e);
 			}
 		});
@@ -53,6 +53,16 @@ JavaScript
 ```
 
 Full example with simple php file available in example directory.
+
+### On complete event
+
+Data parameter contains response from server. If content type of response is JSON, will be automaticly converted to object or array.
+
+Status parameter contains status code from response (ex. 200, 302..)
+
+### On error
+
+Same as above.
 
 ### Supported browsers
 IE 10+, Chrome 7+, FIrefox 4+, Safari 5+, Opera 12+, iOS Safari 5+, Android Browser 3+. Supports also all other mobile browsers excpet Opera Mini 8.
