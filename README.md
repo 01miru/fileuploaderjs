@@ -44,6 +44,7 @@ JavaScript
 			oncomplete: function(data, status, xhr){
 				loader.value = 100;
 				console.log('complete');
+				console.log(data);
 			},
 			onerror: function(data, status, xhr){
 				console.log(e);
