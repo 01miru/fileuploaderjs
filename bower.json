@@ -9,6 +9,8 @@
     "**/.*",
     "node_modules",
     "components",
-    "example"
+    "example",
+    "Gruntfile.js",
+    "package.json"
   ]
 }
