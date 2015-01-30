@@ -34,6 +34,9 @@ JavaScript
 		var upl = fileuploader({
 			selector: '.user-file',
 			url: 'upload.php',
+			headers: {
+				'myCsrfToken': '!334234#2344$234234@@234'
+			},
 			data: {
 				'filename': 'myfile',
 				'type': 'other'
@@ -51,7 +54,7 @@ JavaScript
 				console.log(data);
 			},
 			onerror: function(data, status, xhr){
-				console.log(e);
+				console.log(data);
 			}
 		});
 	}
