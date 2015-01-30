@@ -6,15 +6,26 @@
 		xhr = new XMLHttpRequest(),
 		form_data = new FormData();
 
+	var getUUID = function(){
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    		return v.toString(16);
+		});
+	};
+
 	var prepare_request = function(){
 		xhr = new XMLHttpRequest();
 		xhr.open('post', options.url, true);
+		xhr.uuid = getUUID();
 
 		if(file_field != null){
 			form_data.append('file', file_field.files[sended]);
 			xhr.timeout = options.timeout;
 			if(options.onprogress && typeof options.onprogress == "function"){
 				xhr.upload.addEventListener('progress', options.onprogress, false);
+			}
+			if(options.onsubmit && typeof options.onsubmit == "function"){
+				options.onsubmit(xhr);
 			}
 			if(options.oncomplete && typeof options.oncomplete == "function"){
 				xhr.addEventListener('loadend', function(){
