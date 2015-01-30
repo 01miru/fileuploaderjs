@@ -1,4 +1,4 @@
-# HTML5 file uploader
+# HTML5 file uploader ![alt text](https://travis-ci.org/01miru/fileuploaderjs.svg?branch=master "travis")
 
 Tiny pure javascript ajax uploader for modern browsers (including mobile).
 
