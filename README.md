@@ -38,7 +38,11 @@ JavaScript
 				'filename': 'myfile',
 				'type': 'other'
 			},
-			onprogress: function(e){
+			onsubmit: function(xhr){
+				console.log("Starting upload for: " + xhr.fu.file.name);
+				console.log("Upload uuid: " + xhr.fu.uuid);
+			},
+			onprogress: function(e, xhr){
 				loader.value = Math.round((e.loaded / e.total) * 100);
 			},
 			oncomplete: function(data, status, xhr){
