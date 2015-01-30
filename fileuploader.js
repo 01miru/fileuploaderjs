@@ -16,13 +16,19 @@
 	var prepare_request = function(){
 		xhr = new XMLHttpRequest();
 		xhr.open('post', options.url, true);
-		xhr.uuid = getUUID();
+		xhr.fu = {
+			'uuid': getUUID(),
+			'file': null
+		};
 
 		if(file_field != null){
 			form_data.append('file', file_field.files[sended]);
+			xhr.fu.file = file_field.files[sended];
 			xhr.timeout = options.timeout;
 			if(options.onprogress && typeof options.onprogress == "function"){
-				xhr.upload.addEventListener('progress', options.onprogress, false);
+				xhr.upload.addEventListener('progress', function(progress){
+					options.onprogress(progress, xhr);
+				}, false);
 			}
 			if(options.onsubmit && typeof options.onsubmit == "function"){
 				options.onsubmit(xhr);
