@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= pkg.version %> by <%= pkg.author %> | <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        compress: true,
+        compress: {},
         mangle: true
       },
       build: {

@@ -1,10 +1,11 @@
-/* fileuploader.js v0.1.4dev by Dorian Nowak */
+/* fileuploader.js v0.1.6 by Dorian Nowak */
 (function(window, undefined){
 	var sended = 0,
 		file_field = null,
 		options = null,
 		xhr = new XMLHttpRequest(),
-		form_data = new FormData();
+		form_data = new FormData(),
+		input_name = 'file';
 
 	var getUUID = function(){
 		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -22,7 +23,7 @@
 		};
 
 		if(file_field != null){
-			form_data.append('file', file_field.files[sended]);
+			form_data.append(input_name, file_field.files[sended]);
 			xhr.fu.file = file_field.files[sended];
 			xhr.timeout = options.timeout;
 			if(options.onprogress && typeof options.onprogress == "function"){
@@ -88,6 +89,9 @@
 			form_data = new FormData();
 			options = input_options;
 			file_field = document.querySelector(input_options.selector);
+			if(input_options.file_input_name){
+				input_name = input_options.file_input_name
+			}
 			prepare_request();
 			xhr.send(form_data);
 		}else{
@@ -102,7 +106,7 @@
 				delete xhr;
 				xhr = new XMLHttpRequest();
 				form_data = new FormData();
-				form_data.append('file', file_field.files[sended]);
+				form_data.append(input_name, file_field.files[sended]);
 				prepare_request();
 				xhr.send(form_data);
 				delete form_data;

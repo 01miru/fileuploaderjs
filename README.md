@@ -33,6 +33,7 @@ JavaScript
 		var loader = document.querySelector('.progressbar');
 		var upl = fileuploader({
 			selector: '.user-file',
+			file_input_name: 'file',
 			url: 'upload.php',
 			headers: {
 				'myCsrfToken': '!334234#2344$234234@@234'
