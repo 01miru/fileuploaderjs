@@ -1,4 +1,4 @@
-/* fileuploader.js v0.1.6 by Dorian Nowak */
+/* fileuploader.js v0.1.7 by Dorian Nowak */
 (function(window, undefined){
 	var sended = 0,
 		file_field = null,
@@ -45,6 +45,12 @@
 					}
 					options.oncomplete(response, this.status, this);
 				}, false);
+
+                if(file_field.files.length == sended + 1){
+                    if(options.finally && typeof options.finally == "function") {
+                        options.finally();
+                    }
+                }
 			}
 			if(options.onerror && typeof options.onerror == "function"){
 				xhr.addEventListener('error', function(){

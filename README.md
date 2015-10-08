@@ -56,7 +56,11 @@ JavaScript
 			},
 			onerror: function(data, status, xhr){
 				console.log(data);
+			},
+			finally: function(){
+			    console.log('all files sent');
 			}
+
 		});
 	}
 ```

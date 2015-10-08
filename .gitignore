@@ -1,2 +1,4 @@
 example/uploads/*
 node_modules
+.idea/
+specs/
