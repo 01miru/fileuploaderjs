@@ -1,12 +1,43 @@
 # HTML5 file uploader [![Build Status](https://travis-ci.org/01miru/fileuploaderjs.svg?branch=master)](https://travis-ci.org/01miru/fileuploaderjs)
 
-Tiny pure javascript ajax uploader for modern browsers (including mobile).
+Tiny, multifile, pure javascript (works without jquery) ajax uploader for modern browsers (including mobile).
+
+## Features
+
+- Can handle large files (1GB+)
+- Multi file support
+- Every file will be send as separate request
+- Ultra lightweight ~ 2KB
+- Every file has unique identifier (UUID)
+- Ultra customizable
+- Mobile browsers are supported
+- MIT Licensed
 
 ## Installation using bower
 
 ```shell
 > bower install fileuploader
 ```
+
+## Options
+
+Name             | Type    | Description
+-----------------|---------|-----------------------------
+url			     | string  | URL for sending requests
+file_input_name  | string  | file field name in request (default: "file")
+headers	         | object  | list of headers
+data		     | object  | list of other parameters to send
+selector		 | string  | file input selector (ex. "#file-input")
+
+## Events
+
+Name        | Type     | Description
+------------|----------|---------------------------
+onsubmit    | function | after each upload
+onprogress  | function | while uploading file 
+oncomplete  | function | after sending the file
+onerror     | function | when error occured
+finally     | function | after sending all files
 
 ## Example
 
@@ -29,40 +60,40 @@ HTML
 JavaScript
 
 ```javascript
-	function upload(){
-		var loader = document.querySelector('.progressbar');
-		var upl = fileuploader({
-			selector: '.user-file',
-			file_input_name: 'file',
-			url: 'upload.php',
-			headers: {
-				'myCsrfToken': '!334234#2344$234234@@234'
-			},
-			data: {
-				'filename': 'myfile',
-				'type': 'other'
-			},
-			onsubmit: function(xhr){
-				console.log("Starting upload for: " + xhr.fu.file.name);
-				console.log("Upload uuid: " + xhr.fu.uuid);
-			},
-			onprogress: function(e, xhr){
-				loader.value = Math.round((e.loaded / e.total) * 100);
-			},
-			oncomplete: function(data, status, xhr){
-				loader.value = 100;
-				console.log('complete');
-				console.log(data);
-			},
-			onerror: function(data, status, xhr){
-				console.log(data);
-			},
-			finally: function(){
-			    console.log('all files sent');
-			}
+function upload(){
+    var loader = document.querySelector('.progressbar');
+    var upl = fileuploader({
+        selector: '.user-file',
+        file_input_name: 'file',
+        url: 'upload.php',
+        headers: {
+            'myCsrfToken': '!334234#2344$234234@@234'
+        },
+        data: {
+            'filename': 'myfile',
+            'type': 'other'
+        },
+        onsubmit: function(xhr){
+            console.log("Starting upload for: " + xhr.fu.file.name);
+            console.log("Upload uuid: " + xhr.fu.uuid);
+        },
+        onprogress: function(e, xhr){
+            loader.value = Math.round((e.loaded / e.total) * 100);
+        },
+        oncomplete: function(data, status, xhr){
+            loader.value = 100;
+            console.log('complete');
+            console.log(data);
+        },
+        onerror: function(data, status, xhr){
+            console.log(data);
+        },
+        finally: function(){
+            console.log('all files sent');
+        }
 
-		});
-	}
+    });
+}
 ```
 
 Full example with simple php file available in example directory.
