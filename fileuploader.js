@@ -1,4 +1,4 @@
-/* fileuploader.js v0.1.7 by Dorian Nowak */
+/* fileuploader.js v0.1.8 by Dorian Nowak */
 (function(window, undefined){
 	var sended = 0,
 		file_field = null,
@@ -44,13 +44,13 @@
 						}catch(ex){}
 					}
 					options.oncomplete(response, this.status, this);
-				}, false);
 
-                if(file_field.files.length == sended + 1){
-                    if(options.finally && typeof options.finally == "function") {
-                        options.finally();
-                    }
-                }
+		            if(file_field.files.length == sended + 1){
+		                if(options.finally && typeof options.finally == "function") {
+		                    options.finally();
+		                }
+		            }
+				}, false);
 			}
 			if(options.onerror && typeof options.onerror == "function"){
 				xhr.addEventListener('error', function(){
@@ -79,11 +79,18 @@
 		}
 
 		if(options.data){
-			for(key in options.data)
-			{
-				form_data.append(key, options.data[key]);	
-			}
-		}		
+            if(options.dataType && options.dataType == 'array'){
+                for(key in options.data)
+                {
+                    form_data.append(options.data[key]['name'], options.data[key]['value']);
+                }
+            }else{
+                for(key in options.data)
+                {
+                    form_data.append(key, options.data[key]);
+                }
+            }
+		}
 
 		xhr.addEventListener('loadend', function(){
 			upload_next_file();
