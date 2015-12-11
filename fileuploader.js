@@ -101,6 +101,7 @@
 		if(typeof input_options == "object"){
 			form_data = new FormData();
 			options = input_options;
+			sended = 0;
 			file_field = document.querySelector(input_options.selector);
 			if(input_options.file_input_name){
 				input_name = input_options.file_input_name

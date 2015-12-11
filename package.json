@@ -1,6 +1,6 @@
 {
   "name": "fileuploader",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "author": "Dorian Nowak",
   "devDependencies": {
     "grunt": "~0.4.5",
