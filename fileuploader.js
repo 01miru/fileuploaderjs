@@ -1,4 +1,4 @@
-/* fileuploader.js v0.1.8 by Dorian Nowak */
+/* fileuploader.js v0.1.10 by Dorian Nowak */
 (function(window, undefined){
 	var sended = 0,
 		file_field = null,
@@ -118,9 +118,7 @@
 			sended+=1;
 			if(file_field.files[sended] != undefined){
 				delete xhr;
-				xhr = new XMLHttpRequest();
-				form_data = new FormData();
-				form_data.append(input_name, file_field.files[sended]);
+				form_data = new FormData();		
 				prepare_request();
 				xhr.send(form_data);
 				delete form_data;

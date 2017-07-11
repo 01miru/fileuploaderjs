@@ -1,6 +1,6 @@
 {
   "name": "fileuploader",
-  "version": "0.1.5",
+  "version": "0.1.10",
   "main": "fileuploader.min.js",
   "authors": [{"name": "Dorian Nowak", "email": "01miru@gmail.com"}],
   "description": "Modern ajax file uploader MIT licenced",
